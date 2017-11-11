@@ -11,5 +11,6 @@
 | 47nF capacitor | 2 | [ebay](https://www.ebay.co.uk/itm/Polyester-Film-Capacitor-250V-Rate-Values-between-3-9NF-47NF-Free-Post/122758503291?hash=item1c94fa1b7b:m:mdQ_BSH2qt5oqgmI-0fCmjg) | £0.99 | £2.45 | - |
 | 1nF capacitor | 10 | [ebay](http://www.ebay.co.uk/itm/Ceramic-Disc-Capacitors-50V-47-values-10-1000pcs/231179599601?hash=item35d360bef1:m:mIA8vDYE-tD3WKUbDcR2xGQ) | £0.99 | £1.56 | - |
 | 10KOhm resistor | almost unlimited | Piotr | 0 | 0 | I have a ton of those at home. Don't even think of buying them. |
+| Battery connectors | 10 | [ebay](https://www.ebay.co.uk/itm/10-Pcs-Snap-9V-9-Volt-Battery-Clip-Connector-I-Type-Black-w-Cable-N5R9/282450833242?_trkparms=aid%3D555019%26algo%3DPL.BANDIT%26ao%3D1%26asc%3D20151005190540%26meid%3D2cca270c929e4ded85b8defad520d2d0%26pid%3D100505%26rk%3D1%26rkt%3D1%26&_trksid=p2045573.c100505.m3226) | £1.12 | 0 | - |
 
 Parcel Motel could be a very good option to reduce postage costs. Some of those sellers send for free to UK. If you don't have Parcel Motel set up, let me know.
