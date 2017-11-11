@@ -9,5 +9,7 @@
 | 220uF capacitor | 2 | [ebay](http://www.ebay.co.uk/itm/Radial-Electrolytic-Capacitors-Various-Value-and-Voltage/111047335596?hash=item19daefdeac:m:mLlHCHD7YyD7KfTimxGfciQ) | £1.09 | £2.45 | The voltage for those is not specified in the instruction, so you'll have to double check before ordering. |
 | 10uF capacitor | 2 | [ebay](http://www.ebay.co.uk/itm/Radial-Electrolytic-Capacitors-Various-Value-and-Voltage/111047335596?hash=item19daefdeac:m:mLlHCHD7YyD7KfTimxGfciQ) | £0.99 | 0 | Same seller as above, probably posted in the same package. Same comment about voltage. |
 | 47nF capacitor | 2 | [ebay](https://www.ebay.co.uk/itm/Polyester-Film-Capacitor-250V-Rate-Values-between-3-9NF-47NF-Free-Post/122758503291?hash=item1c94fa1b7b:m:mdQ_BSH2qt5oqgmI-0fCmjg) | £0.99 | £2.45 | - |
+| 1nF capacitor | 10 | [ebay](http://www.ebay.co.uk/itm/Ceramic-Disc-Capacitors-50V-47-values-10-1000pcs/231179599601?hash=item35d360bef1:m:mIA8vDYE-tD3WKUbDcR2xGQ) | £0.99 | £1.56 | - |
+| 10KOhm resistor | almost unlimited | Piotr | 0 | 0 | I have a ton of those at home. Don't even think of buying them. |
 
 Parcel Motel could be a very good option to reduce postage costs. Some of those sellers send for free to UK. If you don't have Parcel Motel set up, let me know.
