@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Problem26
 {
     public class UnitFraction
     {
-        public UnitFraction(UInt16 denominator)
+        private readonly Dictionary<uint, IntegerDivisionResult> _allCarryoverDivisions;
+
+        public UnitFraction(uint denominator)
         {
             if (denominator == 0)
             {
@@ -14,89 +17,105 @@ namespace Problem26
             }
 
             Denominator = denominator;
+
+            _allCarryoverDivisions = GetAllPossibleCarryoverDivisions();
+
+            LoopLength = DetectLoop(_allCarryoverDivisions);
         }
 
-        public UInt16 Denominator { get; }
+        public uint Denominator { get; }
+
+        public uint LoopLength { get; }
 
         public override String ToString()
         {
-            var printableDecimalFractionPartRepresentation = new StringBuilder();
-            LinkedList<UInt16> decimalFractionPartRepresentation = GetDecimalFractionPartRepresentation();
+            Boolean debug = false;
 
-            foreach (UInt16 singleDigit in decimalFractionPartRepresentation)
+            if(debug)
             {
-                printableDecimalFractionPartRepresentation.Append(singleDigit);
-            }
+                var printableAllDivisions = new StringBuilder();
 
-            return $"1/{Denominator}\t=\t{(1.0 / Denominator):0.##}\taka\t{printableDecimalFractionPartRepresentation.ToString()},\tcycle length:\t{FindCycle(decimalFractionPartRepresentation)}";
+                foreach(var singleDivision in _allCarryoverDivisions)
+                {
+                    printableAllDivisions.AppendLine($"{singleDivision.Key}.\t{singleDivision.Key * 10}/{Denominator} = integer division result: {singleDivision.Value.Quotient}, integer division remainder: {singleDivision.Value.Remainder}");
+                }
+
+                if(_allCarryoverDivisions.Count > 0)
+                {
+                    return $"{1}/{Denominator}\t=\t{(1.0 / Denominator)}\nAll carryover divisions:\n{printableAllDivisions.ToString()}. Loop length: {LoopLength}.";
+                }
+                else
+                {
+                    return $"1/{Denominator}\t=\t{(1.0 / Denominator)}. Loop length: {LoopLength}.";
+                }
+            }
+            else
+            {
+                return $"{1}/{Denominator}\t=\t{(1.0 / Denominator)}. Loop length: {LoopLength}.";
+            }
         }
 
-        private LinkedList<UInt16> GetDecimalFractionPartRepresentation()
+        private uint DetectLoop(Dictionary<uint, IntegerDivisionResult> allDivisions)
         {
-            UInt16 currentNominator = 1;
-            UInt16 integerDivision = 0;
-            UInt16 modulo = 0;
-            var result = new LinkedList<UInt16>();
+            var visitedDivisions = new List<IntegerDivisionResult>();
+            var currentDivision = allDivisions.Any() ? allDivisions[1] : null;
+            var noLoop = currentDivision == null ? true : false;
 
-            for (Byte i = 0; i < 100; i++)
+            while (
+                currentDivision != null &&
+                !visitedDivisions.Any(x =>
+                    x.Quotient == currentDivision.Quotient &&
+                    x.Remainder == currentDivision.Remainder) &&
+                !noLoop)
             {
-                integerDivision = (UInt16)(currentNominator / Denominator);
-                modulo = (UInt16)(currentNominator % Denominator);
-                currentNominator = (UInt16)(modulo * 10);
-                result.AddLast(integerDivision);
+                if(currentDivision.Remainder == 0)
+                {
+                    // no remainder => no loop
+                    noLoop = true;
+                }
+                else
+                {
+                    visitedDivisions.Add(
+                        new IntegerDivisionResult(
+                            quotient: currentDivision.Quotient,
+                            remainder: currentDivision.Remainder));
+
+                    currentDivision = allDivisions[currentDivision.Remainder];
+                }
+            }
+
+            if(noLoop)
+            {
+                return 0;
+            }
+            else
+            {
+                return (uint)(visitedDivisions.Count -
+                    visitedDivisions.IndexOf(
+                        visitedDivisions.First(x =>
+                            x.Quotient == currentDivision.Quotient &&
+                            x.Remainder == currentDivision.Remainder)));
+            }
+        }
+
+        private Dictionary<uint, IntegerDivisionResult> GetAllPossibleCarryoverDivisions()
+        {
+            var result = new Dictionary<uint, IntegerDivisionResult>();
+
+            uint carryoverNominator = 0;
+
+            for (uint nominator = 1; nominator < Denominator; nominator++)
+            {
+                carryoverNominator = nominator * 10;
+
+                result.Add(
+                    key: nominator,
+                    value: new IntegerDivisionResult(
+                        quotient: carryoverNominator / Denominator,
+                        remainder: carryoverNominator % Denominator));
             }
 
             return result;
         }
-
-        private UInt16 FindCycle(LinkedList<UInt16> collection)
-        {
-            LinkedListNode<UInt16> tortoise = collection.First;
-            LinkedListNode<UInt16> hare = collection.First;
-            UInt16 loopLength = 0;
-            Boolean loopFound = false;
-            Boolean endReached = false;
-
-            while (!loopFound && !endReached)
-            {
-                if (hare != collection.Last)
-                {
-                    hare = hare.Next;
-
-                    if (hare != collection.Last)
-                    {
-                        hare = hare.Next;
-                        tortoise = tortoise.Next;
-
-                        if (hare.Value == tortoise.Value)
-                        {
-                            loopFound = true;
-
-                            // now let the tortoise catch up
-                            // to get the length of the loop
-                            tortoise = tortoise.Next;
-                            loopLength++;
-
-                            while (hare.Value != tortoise.Value)
-                            {
-                                tortoise = tortoise.Next;
-                                loopLength++;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        endReached = true;
-                    }
-                }
-                else
-                {
-                    endReached = true;
-                }
-            }
-
-            return loopLength;
-        }
     }
 }
-

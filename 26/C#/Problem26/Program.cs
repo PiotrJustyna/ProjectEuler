@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Problem26
 {
@@ -6,10 +8,20 @@ namespace Problem26
     {
         static void Main(string[] args)
         {
-            for(UInt16 i = 1; i <= 300; i++)
+            var fractions = new List<UnitFraction>();
+
+            for(UInt16 i = 1; i <= 1000; i++)
             {
-                Console.WriteLine(new UnitFraction(i));
+                var fraction = new UnitFraction(i);
+
+                fractions.Add(fraction);
+
+                Console.WriteLine(fraction);
             }
+
+            var longestLoop  = fractions.OrderByDescending(x => x.LoopLength).First();
+
+            Console.WriteLine($"The longest loop is for 1/{longestLoop.Denominator}: {longestLoop.LoopLength}.");
         }
     }
 }
